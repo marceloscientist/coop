@@ -1,0 +1,42 @@
+resilience4j:
+  circuitbreaker:
+    instances:
+      getOrdersCB:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        permittedNumberOfCallsInHalfOpenState: 5
+        waitDurationInOpenState: 10000ms
+        failureRateThreshold: 50
+      getOrderByIdCB:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        permittedNumberOfCallsInHalfOpenState: 5
+        waitDurationInOpenState: 10000ms
+        failureRateThreshold: 50
+      orders:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5000ms
+        recordExceptions:
+          - java.io.IOException
+          - java.net.SocketTimeoutException
+
+  retry:
+    instances:
+      getOrdersRetry:
+        maxAttempts: 3
+        waitDuration: 500ms
+
+      getOrderByIdRetry:
+        maxAttempts: 3
+        waitDuration: 500ms
+
+  cache:
+    instances:
+      getOrdersCache:
+        ttl: 60s
+        maximumSize: 100
+      getOrderByIdCache:
+        ttl: 60s
+        maximumSize: 100
