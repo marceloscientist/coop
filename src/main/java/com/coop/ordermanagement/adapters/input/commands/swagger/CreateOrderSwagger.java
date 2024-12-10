@@ -1,6 +1,7 @@
 package com.coop.ordermanagement.adapters.input.commands.swagger;
 
 
+import com.coop.ordermanagement.application.dto.CreateOrderRequestDTO;
 import com.coop.ordermanagement.application.dto.OrderDTO;
 import com.coop.ordermanagement.domain.models.Order;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,5 +21,5 @@ public interface CreateOrderSwagger {
             @ApiResponse(responseCode = "400", description = "Erro de validação",
                     content = @Content)
     })
-    ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO);
+    ResponseEntity<OrderDTO> createOrder(@RequestBody CreateOrderRequestDTO createOrderRequestDTO);
 }

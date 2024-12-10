@@ -1,6 +1,7 @@
 package com.coop.ordermanagement.adapters.input.commands;
 
 import com.coop.ordermanagement.adapters.input.commands.swagger.CreateOrderSwagger;
+import com.coop.ordermanagement.application.dto.CreateOrderRequestDTO;
 import com.coop.ordermanagement.application.dto.OrderDTO;
 import com.coop.ordermanagement.application.mapper.OrderMapper;
 import com.coop.ordermanagement.domain.models.Order;
@@ -23,10 +24,10 @@ public class CreateOrderController implements CreateOrderSwagger {
 
     @Override
     @PostMapping
-    public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO) {
+    public ResponseEntity<OrderDTO> createOrder(@RequestBody CreateOrderRequestDTO createOrderRequestDTO) {
         try {
-            System.out.println("Received Order: " + orderDTO);
-            OrderDTO createdOrder = createOrderUseCase.execute(orderMapper.orderDTOToOrder(orderDTO));
+            System.out.println("Received Order: " + createOrderRequestDTO);
+            OrderDTO createdOrder = createOrderUseCase.execute(createOrderRequestDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdOrder);
         } catch (Exception e) {
             System.err.println("Error during order processing: " + e.getMessage());
