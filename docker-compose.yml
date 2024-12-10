@@ -15,7 +15,7 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: order_management
+      POSTGRES_DB: orderdb
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
